@@ -12,6 +12,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 from datetime import datetime
 import locale
+import platform
 from matplotlib import rcParams
 
 rcParams.update({"font.size": 12, "figure.titlesize": 16})
@@ -41,7 +42,10 @@ def gerar_relatorio_agregacao(data_inicio=data_inicio):
 
     try:
         # Define a localidade para pt_BR
-        locale.setlocale(locale.LC_TIME, "Portuguese_Brazil.1252")
+        if platform.system() == "Windows":
+            locale.setlocale(locale.LC_TIME, "Portuguese_Brazil.1252")
+        else:
+            locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
 
         # Normaliza data_inicio
         if isinstance(data_inicio, str):
